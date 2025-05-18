@@ -63,7 +63,13 @@ export function activate(context: vscode.ExtensionContext) {
         return;
       }
 
-      const db = new sqlite.Database(':memory:');
+		const dbPath = vscode.workspace.workspaceFolders?.[0].uri.fsPath + '/test.db';
+		const db = new sqlite.Database(dbPath, (err) => {
+		if (err) {
+			vscode.window.showErrorMessage('Failed to open test.db: ' + err.message);
+		}
+		});
+
 
       db.serialize(() => {
         db.run('CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT, age INTEGER)');
