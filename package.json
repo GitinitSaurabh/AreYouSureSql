@@ -1,0 +1,51 @@
+{
+  "name": "are-you-sure-sql",
+  "displayName": "AreYouSureSQL",
+  "description": "Preview affected rows for DELETE and UPDATE queries before execution.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "activationEvents": [
+    "onLanguage:sql",
+    "onCommand:AreYouSureSQL.previewAffectedRows"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "sql",
+        "extensions": [".sql"],
+        "aliases": ["SQL"]
+      }
+    ],
+    "commands": [
+      {
+        "command": "AreYouSureSQL.previewAffectedRows",
+        "title": "Safe SQL: Preview Affected Rows"
+      }
+    ],
+    "codeLensProviders": [
+      {
+        "language": "sql"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.18",
+    "@types/vscode": "^1.70.0",
+    "@vscode/test-electron": "^2.3.2",
+    "typescript": "^4.9.0"
+  },
+  "dependencies": {
+    "sqlite3": "^5.1.7"
+  }
+}
